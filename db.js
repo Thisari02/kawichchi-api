@@ -14,6 +14,11 @@ if (!uri) {
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  maxPoolSize: 10,
+  minPoolSize: 1,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+  family: 4,
 };
 
 let cached = global._mongoose;
@@ -27,10 +32,18 @@ async function connectDB() {
   }
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(uri, options).then((mongooseInstance) => {
-      cached.conn = mongooseInstance;
-      return cached.conn;
-    });
+    cached.promise = mongoose
+      .connect(uri, options)
+      .then((mongooseInstance) => {
+        console.log('MongoDB connected');
+        cached.conn = mongooseInstance;
+        return cached.conn;
+      })
+      .catch((error) => {
+        console.error('MongoDB connection error:', error.message);
+        cached.promise = null;
+        throw error;
+      });
   }
 
   return cached.promise;
