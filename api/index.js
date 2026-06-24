@@ -1,10 +1,12 @@
 const express = require('express');
 const connectDB = require('../db');
+const cors = require('cors');
 const app = express();
 
 const userRoutes = require('../routes/userRoutes');
 const studentRoutes = require('../routes/studentRoutes');
 
+app.use(cors());
 app.use(express.json());
 
 app.use(async (req, res, next) => {
