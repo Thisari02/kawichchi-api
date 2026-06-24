@@ -27,7 +27,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.updateUser = async (req, res) => {
+exports.updateUser = async (req, res) => {  
   try {
     const { id } = req.params;
     const { name, email, age } = req.body;

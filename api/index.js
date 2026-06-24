@@ -3,6 +3,7 @@ const connectDB = require('../db');
 const app = express();
 
 const userRoutes = require('../routes/userRoutes');
+const studentRoutes = require('../routes/studentRoutes');
 
 app.use(express.json());
 
@@ -17,7 +18,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use('/users', userRoutes);
-
+app.use('/students', studentRoutes);
 app.use((err, req, res, next) => {
   console.error('Error:', err.message);
   res.status(500).json({ error: err.message });
