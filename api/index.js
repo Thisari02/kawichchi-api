@@ -7,7 +7,7 @@ const userRoutes = require('../routes/userRoutes');
 const studentRoutes = require('../routes/studentRoutes');
 
 app.use(cors({
-  origin: 'https://vite-project-woad-sigma.vercel.app',
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
